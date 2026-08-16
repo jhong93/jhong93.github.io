@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Temporally Precise Spotting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="../img/favicon-stanford.svg">
+    <link rel="alternate icon" href="../img/favicon-stanford.ico">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container header">
+        <h1 class="title">Spotting Temporally Precise, Fine-Grained Events in Video</h1>
+        <h5 class="authors">
+            <a href="/">James Hong</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+            <a href="https://cs.stanford.edu/~haotianz/">Haotian Zhang</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+            <a href="http://www.mgharbi.com/">Micha&euml;l Gharbi</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+            <a href="https://techmatt.github.io/">Matthew Fisher</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+            <a href="http://graphics.stanford.edu/~kayvonf/">Kayvon Fatahalian</a><sup>1</sup>
+        </h5>
+        <h4 class="affiliations">
+            <sup>1</sup>Stanford University
+            &nbsp;&nbsp;&nbsp;
+            <sup>2</sup>Adobe Research
+        </h4>
+        <h5 class="venue">
+            ECCV 2022
+        </h5>
+    </div>
+
+    <div class="container teaser">
+        <img src="img/spot-system.jpg" alt="End-to-end Architecture for Spotting">
+    </div>
+
+    <div class="container content">
+        <h2>Abstract</h2>
+        <p>
+            We introduce the task of spotting temporally precise, fine-grained events in video (detecting the precise moment in time events occur). Precise spotting requires models to reason globally about the full-time scale of actions and locally to identify subtle frame-to-frame appearance and motion differences that identify events during these actions. Surprisingly, we find that top performing solutions to prior video understanding tasks such as action detection and segmentation do not simultaneously meet both requirements.
+        </p>
+        <p>
+            In response, we propose E2E-Spot, a compact, end-to-end model that performs well on the precise spotting task and can be trained quickly on a single GPU. We demonstrate that E2E-Spot significantly outperforms recent baselines adapted from the video action detection, segmentation, and spotting literature to the precise spotting task. Finally, we contribute new annotations and splits to several fine-grained sports action datasets to make these datasets suitable for future work on precise spotting.
+        </p>
+    </div>
+
+    <div class="container content">
+        <h2>Materials</h2>
+        <div class="materials">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            <a href="../pdf/spot-eccv22.pdf" target="_blank">Paper</a>
+        </div>
+        <div class="materials">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            <a href="../pdf/spot-supp.pdf" target="_blank">Supplemental Materials</a>
+        </div>
+        <div class="materials">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <a href="http://arxiv.org/abs/2207.10213" target="_blank">arXiv</a>
+        </div>
+        <div class="materials">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <a href="https://github.com/jhong93/spot" target="_blank">Code</a>
+        </div>
+    </div>
+
+    <div class="container content">
+        <h2>Video</h2>
+        <div class="center">
+            <video width="750" controls>
+                <source src="img/spot-video.mp4" type="video/mp4">
+                <!-- <track src="img/spot-sub.vtt" kind="subtitles" srclang="en" label="English" default> -->
+                Your browser does not support video tags.
+            </video>
+        </div>
+    </div>
+
+    <div class="container content">
+        <h2>Citation</h2>
+        <pre class="bibtex">
+@inproceedings{precisespotting_eccv22,
+    author={Hong, James and Zhang, Haotian and Gharbi, Micha\"{e}l and Fisher, Matthew and Fatahalian, Kayvon},
+    title={Spotting Temporally Precise, Fine-Grained Events in Video},
+    booktitle={ECCV},
+    year={2022}
+}</pre>
+    </div>
+
+    <div class="container content">
+        <h2>Acknowledgements</h2>
+        <p>
+            This work is supported by the National Science Foundation (NSF) under III-1908727, Intel Corporation, and Adobe Research.
+        </p>
+    </div>
+  </body>
+</html>
