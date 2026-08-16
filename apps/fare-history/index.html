@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore the cheapest fares in The Flight Deal historical archive." />
+    <title>Historical Flight Prices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body class="locked">
+    <div class="unlock-overlay" id="unlock-overlay" role="dialog" aria-modal="true" aria-labelledby="unlock-title" aria-describedby="unlock-copy">
+      <form class="unlock-card" id="unlock-form">
+        <div class="unlock-mark" aria-hidden="true">✈</div>
+        <p class="kicker">Protected archive</p>
+        <h1 id="unlock-title">Unlock Fare History</h1>
+        <p id="unlock-copy">Enter the archive key to decrypt and open the flight database.</p>
+        <label for="unlock-key">Archive key</label>
+        <div class="unlock-field">
+          <input id="unlock-key" type="password" autocomplete="current-password" required autofocus aria-describedby="unlock-status" />
+          <button id="unlock-button" type="submit">Unlock</button>
+        </div>
+        <p class="unlock-status" id="unlock-status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div id="page-shell" inert aria-hidden="true">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Fare History home">
+        <span class="brand-mark" aria-hidden="true">✈</span>
+        <span>Fare History</span>
+      </a>
+      <p id="archive-range">Loading archive…</p>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>What flights used to cost?</h1>
+        <p class="hero-copy">Search years of advertised fares by IATA airport code, compare routes, and find the lowest historical price.</p>
+        <div class="hero-stat" aria-live="polite">
+          <span id="hero-count">—</span>
+          <small>historical deals indexed</small>
+        </div>
+        <div class="hero-flight-path" aria-hidden="true">
+          <span>SFO</span>
+          <div><i>✈</i></div>
+          <span>LHR</span>
+          <small>Route scan active</small>
+        </div>
+      </section>
+
+      <section class="search-panel" aria-labelledby="filter-title">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">01 / Search</p>
+            <h2 id="filter-title">Find a fare</h2>
+          </div>
+          <button class="text-button" id="reset-button" type="button">Reset filters</button>
+        </div>
+
+        <form id="filter-form">
+          <div class="route-fields">
+            <label>
+              <span>Origin airports · match any</span>
+              <input id="origin" class="code-input multi-code-input" list="origin-options" type="search" value="SFO, SJC" placeholder="SFO, LAX, SEA" autocomplete="off" aria-label="Origin IATA codes separated by commas" />
+              <datalist id="origin-options"></datalist>
+            </label>
+            <button class="swap-button" id="swap-button" type="button" aria-label="Swap origin and destination">⇄</button>
+            <label>
+              <span>Destination airport</span>
+              <input id="destination" class="code-input" list="destination-options" type="search" maxlength="3" placeholder="LHR" autocomplete="off" aria-label="Destination IATA code" />
+              <datalist id="destination-options"></datalist>
+            </label>
+          </div>
+
+          <div class="secondary-fields">
+            <label>
+              <span>Year range</span>
+              <div class="year-range">
+                <select id="year-from" aria-label="Starting year"></select>
+                <b aria-hidden="true">—</b>
+                <select id="year-to" aria-label="Ending year"><option value="">Present</option></select>
+              </div>
+            </label>
+          </div>
+        </form>
+      </section>
+
+      <section class="summary" aria-live="polite">
+        <article class="price-card">
+          <p>Lowest matching fare</p>
+          <strong id="best-price">—</strong>
+          <span id="best-route">Adjust filters to explore</span>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Matching deals</span>
+          <strong id="match-count">—</strong>
+          <small id="route-count">— routes</small>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Median fare</span>
+          <strong id="median-price">—</strong>
+          <small>across current results</small>
+        </article>
+      </section>
+
+      <section class="history-panel map-panel" aria-labelledby="history-title">
+        <div class="section-heading compact">
+          <div>
+            <p class="kicker">02 / Route map</p>
+            <h2 id="history-title">Where the deals go</h2>
+          </div>
+          <div class="map-legend"><span></span> Lowest fare by route</div>
+        </div>
+        <div class="map-status">
+          <strong id="map-focus">Select an origin airport</strong>
+          <span id="map-note">Enter an IATA code above to map its historical destinations.</span>
+        </div>
+        <div id="route-map" class="route-map" role="region" aria-label="Interactive map of historical airport routes; click an origin airport to search from it"></div>
+        <div class="map-metrics">
+          <span><strong id="mapped-routes">—</strong> mapped routes</span>
+          <span><strong id="mapped-low">—</strong> lowest mapped fare</span>
+          <span>Airport codes and coordinates validated with OurAirports</span>
+        </div>
+      </section>
+
+      <section class="results-panel" aria-labelledby="results-title">
+        <div class="section-heading compact">
+          <div>
+            <p class="kicker">03 / Results</p>
+            <h2 id="results-title">Cheapest fares</h2>
+          </div>
+          <label class="sort-control"><span>Sort</span><select id="sort"><option value="price">Price: low to high</option><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
+        </div>
+
+        <div class="distribution-panel" aria-labelledby="distribution-title">
+          <div class="distribution-heading">
+            <div>
+              <span class="distribution-kicker">Fare distribution</span>
+              <strong id="distribution-title">Historical price spread</strong>
+            </div>
+            <span id="distribution-note">Tukey box plot · USD</span>
+          </div>
+          <div id="box-plot" class="box-plot" role="img" aria-label="Box and whisker plot of matching historical fares"></div>
+          <div class="scatter-section">
+            <div class="scatter-heading">
+              <div>
+                <span>Price history</span>
+                <strong>Advertised fare over time</strong>
+              </div>
+              <span id="scatter-note">Each dot is a historical deal</span>
+            </div>
+            <div id="scatter-plot" class="scatter-plot" role="img" aria-label="Scatter plot of advertised flight prices over time">
+              <canvas id="scatter-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Airport route</th><th>Carrier</th><th>Published</th><th class="price-column">Best fare</th><th><span class="sr-only">Open deal</span></th></tr></thead>
+            <tbody id="results-body"></tbody>
+          </table>
+          <div id="empty-state" class="empty-state" hidden>
+            <span>✦</span>
+            <h3>No fares found</h3>
+            <p>Try removing a city, date, or price filter.</p>
+          </div>
+        </div>
+        <button id="load-more" class="load-more" type="button" hidden>Show more fares</button>
+      </section>
+    </main>
+    </div>
+  </body>
+</html>

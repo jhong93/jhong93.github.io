@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.666 --> 00:05.700
+We present Video Pose Distillation for Few-Shot, Fine-Grained Action Recognition.
+
+00:05.700 --> 00:09.266
+This work is a collaboration between Adobe Research and Stanford University.
+
+00:11.500 --> 00:15.100
+Human centric sports represent a large class of interesting activities
+
+00:15.100 --> 00:18.266
+where large amounts of video data are available and where athletes
+
+00:18.266 --> 00:22.133
+perform a sophisticated set of acrobatic feats and technical actions.
+
+00:23.800 --> 00:26.666
+Performing tasks such as recognizing, detecting or retrieving
+
+00:26.666 --> 00:29.500
+these actions is an exciting area of research,
+
+00:29.500 --> 00:32.233
+and choosing the right feature representations is important.
+
+00:32.233 --> 00:36.200
+For video centered around athletes and their motion, pose-based methods
+
+00:36.200 --> 00:41.666
+leverage information about the human body, but they depend on accurate 2D pose estimation.
+
+00:41.966 --> 00:46.800
+This is problematic, because sports video is challenging for pose estimation.
+
+00:46.800 --> 00:50.733
+Motion is often most intense in the critical action
+
+00:50.733 --> 00:53.033
+frames, causing blur and ambiguity.
+
+00:53.033 --> 00:57.433
+Athletes also undertake extreme poses, seldom seen in daily life.
+
+00:57.433 --> 01:01.366
+Improving pose estimation is possible, but requires new pose
+
+01:01.366 --> 01:04.600
+annotations, which can be expensive to obtain.
+
+01:07.433 --> 01:08.466
+By contrast, end-to-end
+
+01:08.466 --> 01:11.833
+learning, for tasks such as action recognition, is often preferred.
+
+01:11.833 --> 01:13.400
+By training on the pixels
+
+01:13.400 --> 01:16.566
+directly, circumventing pose, these methods can be more reliable,
+
+01:16.566 --> 01:20.433
+even if pose estimates are not, but they require more labeled
+
+01:20.433 --> 01:23.966
+actions to train and are specialized to a particular task.
+
+01:25.566 --> 01:28.166
+This motivates the question:
+
+01:28.166 --> 01:30.633
+How do we learn reliable
+
+01:30.633 --> 01:32.500
+pose features for sports video that, like pose,
+
+01:32.500 --> 01:35.033
+benefit a variety of downstream tasks?
+
+01:35.033 --> 01:37.466
+And how do we do so without new pose annotations?
+
+01:39.900 --> 01:44.400
+We introduce Video Pose Distillation, or VPD, a novel method that combines
+
+01:44.400 --> 01:49.400
+the benefits of both pose and end-to-end methods.
+
+01:49.400 --> 01:52.700
+The inputs to VPD are an unlabeled corpus of video
+
+01:52.700 --> 01:54.933
+and a pose feature extraction pipeline, in this case
+
+01:54.933 --> 01:58.400
+consisting of a pretrained pose estimator and view-invariant pose embedding.
+
+01:59.033 --> 02:01.800
+Given each input video to VPD,
+
+02:01.800 --> 02:04.300
+there are two data pathways, the teacher and the student.
+
+02:05.200 --> 02:08.033
+The teacher takes the video and extracts
+
+02:08.033 --> 02:11.100
+pose features for the athlete using pretrained models.
+
+02:11.100 --> 02:14.533
+The student is a neural network that is distilled
+
+02:14.533 --> 02:17.966
+on the pixels, with the teacher’s outputs as weak-supervision.
+
+02:17.966 --> 02:20.600
+This setup is beneficial in several ways.
+
+02:21.166 --> 02:24.466
+First, note that no ground truth pose or action
+
+02:24.466 --> 02:26.266
+labels are required for distillation.
+
+02:26.266 --> 02:28.266
+VPD is agnostic to downstream tasks.
+
+02:28.266 --> 02:31.366
+Our key insight is that, by training the student
+
+02:31.366 --> 02:35.400
+over a large corpus of unlabeled video, the student learns features
+
+02:35.400 --> 02:39.400
+that agree with the teacher’s pose when the teacher is reliable.
+
+02:40.633 --> 02:44.400
+And, the student, with access to the pixels, is able
+
+02:44.400 --> 02:48.166
+to specialize to the visual patterns in the sport video domain
+
+02:48.166 --> 02:52.333
+and avoid the teacher’s mistakes when the teacher is unreliable.
+
+02:52.333 --> 02:56.066
+We also leverage temporal information, from video, to learn motion.
+
+02:56.633 --> 03:00.533
+This is done by encoding both the current frame and the previous
+
+03:00.533 --> 03:04.600
+frame with the teacher to obtain the current pose and its temporal derivative.
+
+03:04.600 --> 03:08.333
+The student receives the pixels and optical flow of the current frame
+
+03:08.333 --> 03:10.600
+and is tasked to produce a descriptor.
+
+03:11.600 --> 03:14.300
+A second network, to decode the student’s
+
+03:14.300 --> 03:17.133
+features, is used at training time to provide supervision for the student.
+
+03:17.133 --> 03:21.700
+This decoder has the added effect of allowing the student to produce features that differ from the teacher,
+
+03:21.700 --> 03:25.000
+encapsulating motion information as well as pose.
+
+03:25.433 --> 03:30.533
+At inference time, only the student is needed to produce features for downstream tasks.
+
+03:31.066 --> 03:35.133
+We find that VPD features outperform their teacher on fine-grained action
+
+03:35.133 --> 03:37.800
+recognition tasks on our four evaluation datasets
+
+03:37.800 --> 03:41.266
+when used as inputs to a generic GRU classifier.
+
+03:43.700 --> 03:45.200
+They also outperform or
+
+03:45.200 --> 03:48.466
+are competitive with state-of-the-art pose-based and end-to-end methods.
+
+03:48.466 --> 03:53.433
+In limited supervision settings, such as when only 8 to 64 examples
+
+03:53.433 --> 03:57.100
+per action class are available, VPD features perform well.
+
+03:57.100 --> 04:01.633
+Here are two datasets where pose estimation is the most challenging.
+
+04:02.433 --> 04:06.400
+VPD significantly outperforms its teacher and prior methods.
+
+04:11.266 --> 04:14.666
+Finally, VPD features are also effective for
+
+04:14.666 --> 04:17.333
+tasks such as action retrieval and detection.
+
+04:19.766 --> 04:22.566
+In summary, we have presented Video Pose Distillation,
+
+04:22.566 --> 04:25.133
+a novel method to learn robust pose
+
+04:25.133 --> 04:28.266
+features for challenging video datasets, without new pose labels,
+
+04:28.266 --> 04:31.833
+that combines the benefits of both pose and end-to-end learning.
+
+04:31.833 --> 04:35.333
+As a potential application of VPD, we hope that our work will improve
+
+04:35.333 --> 04:36.666
+analysis of interesting sports datasets
+
+04:36.666 --> 04:39.700
+and be beneficial for tasks such as labeling and curating new ones.
+
+04:41.366 --> 04:43.733
+Thank you for listening.
+
+04:43.733 --> 04:46.400
+Please check out our paper for additional experiments and details.
+
+04:46.400 --> 04:49.466
+Our code and data are also available at our website.
