@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Holly and James — a private wedding portrait collection."
+    />
+    <meta name="theme-color" content="#721c24" />
+    <title>Holly &amp; James · Wedding Gallery</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js?v=20260830-3" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#gallery">Skip to the photographs</a>
+
+    <div class="unlock" id="unlockScreen" role="dialog" aria-modal="true" aria-labelledby="unlockTitle">
+      <div class="unlock__panel">
+        <div class="unlock__seal" lang="zh-Hans" aria-hidden="true">囍</div>
+        <p class="unlock__kicker">Private album</p>
+        <h1 id="unlockTitle">Holly <i>&amp;</i> James</h1>
+        <p class="unlock__intro">Enter the album password to unveil the photographs.</p>
+        <form class="unlock__form" id="unlockForm">
+          <div class="unlock__field">
+            <input
+              id="albumKey"
+              name="album-key"
+              type="password"
+              aria-label="Album password"
+              inputmode="text"
+              autocomplete="off"
+              spellcheck="false"
+              required
+              aria-describedby="unlockMessage"
+            />
+            <button type="submit"><span>Open album</span><span aria-hidden="true">→</span></button>
+          </div>
+          <p class="unlock__message" id="unlockMessage" aria-live="polite"></p>
+        </form>
+        <span class="unlock__corner unlock__corner--top" aria-hidden="true"></span>
+        <span class="unlock__corner unlock__corner--bottom" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <header class="site-header" id="siteHeader">
+      <a class="brand" href="#top" aria-label="Holly and James, back to top">
+        <span class="brand__seal" lang="zh-Hans" aria-hidden="true">囍</span>
+        <span class="brand__names">Holly <i>&amp;</i> James</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#gallery"><span lang="zh-Hans">影集</span> Gallery</a>
+      </nav>
+    </header>
+
+    <main id="top" tabindex="-1">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero__copy">
+          <h1 id="heroTitle">
+            <span>Holly</span>
+            <i>&amp;</i>
+            <span>James</span>
+          </h1>
+          <div class="hero__blessing">
+            <span class="hero__blessing-mark" lang="zh-Hans" aria-hidden="true">囍</span>
+            <p>
+              <span lang="zh-Hans">执子之手，与子偕老</span>
+              <small>Hand in hand, for all our days.</small>
+            </p>
+          </div>
+          <a class="hero__cta" href="#gallery">
+            <span>View the album</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="hero__visual" aria-label="Featured wedding portrait">
+          <div class="hero__frame photo-shell is-loading">
+            <img
+              class="protected-photo"
+              id="heroPhoto"
+              width="900"
+              height="600"
+              decoding="async"
+            />
+            <span class="photo-shell__fallback" aria-hidden="true">
+              <span lang="zh-Hans">囍</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="hero__corner hero__corner--one" aria-hidden="true"></div>
+        <div class="hero__corner hero__corner--two" aria-hidden="true"></div>
+      </section>
+
+      <section class="album" id="gallery" aria-labelledby="galleryTitle">
+        <header class="album__header section-reveal">
+          <div>
+            <p class="section-kicker"><span lang="zh-Hans">珍藏</span> · The collection</p>
+            <h2 id="galleryTitle">Our wedding portraits</h2>
+          </div>
+          <div class="album__count" aria-live="polite">
+            <strong id="visibleCount">—</strong>
+            <span>photographs</span>
+          </div>
+        </header>
+
+        <div class="album__toolbar section-reveal">
+          <div class="filters" role="group" aria-label="Filter photographs by chapter">
+            <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">
+              <span lang="zh-Hans">全部</span> All
+            </button>
+            <button class="filter" type="button" data-filter="red" aria-pressed="false">
+              <span lang="zh-Hans">红妆</span> Tradition
+            </button>
+            <button class="filter" type="button" data-filter="garden" aria-pressed="false">
+              <span lang="zh-Hans">林间</span> Forest
+            </button>
+            <button class="filter" type="button" data-filter="formal" aria-pressed="false">
+              <span lang="zh-Hans">华礼</span> Formal
+            </button>
+            <button class="filter" type="button" data-filter="studio" aria-pressed="false">
+              <span lang="zh-Hans">影棚</span> Studio
+            </button>
+          </div>
+          <p class="decrypt-status" id="decryptStatus" aria-live="polite">
+            Preparing the album…
+          </p>
+        </div>
+
+        <div class="gallery" id="photoGrid" aria-live="polite"></div>
+
+        <div class="album__end section-reveal" aria-hidden="true">
+          <span></span><i lang="zh-Hans">缘</i><span></span>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>Holly <span aria-hidden="true">&amp;</span> James</p>
+      <span class="site-footer__diamond" aria-hidden="true">◆</span>
+      <p><span lang="zh-Hans">永结同心</span> · Forever, together</p>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Photograph viewer">
+      <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Close photograph">
+        <span aria-hidden="true">×</span>
+      </button>
+      <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" type="button" aria-label="Previous photograph">
+        <span aria-hidden="true">←</span>
+      </button>
+      <div class="lightbox__stage photo-shell">
+        <img class="protected-photo" id="lightboxPhoto" decoding="async" />
+        <span class="photo-shell__fallback" aria-hidden="true"><span lang="zh-Hans">囍</span></span>
+      </div>
+      <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" type="button" aria-label="Next photograph">
+        <span aria-hidden="true">→</span>
+      </button>
+    </dialog>
+
+    <noscript>
+      <div class="noscript">
+        JavaScript is required to unlock and display this encrypted photo album.
+      </div>
+    </noscript>
+  </body>
+</html>
