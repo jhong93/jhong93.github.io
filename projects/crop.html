@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Generative Cropping</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="../img/favicon-stanford.svg">
+    <link rel="alternate icon" href="../img/favicon-stanford.ico">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container header">
+        <h1 class="title">Learning Subject-Aware Cropping by Outpainting Professional Photos</h1>
+        <h5 class="authors">
+            <a href="/">James Hong</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+            <a href="https://www.linkedin.com/in/sylvia-yuan-38792a193/">Lu Yuan</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+            <a href="http://www.mgharbi.com/">Micha&euml;l Gharbi</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+            <a href="https://techmatt.github.io/">Matthew Fisher</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+            <a href="http://graphics.stanford.edu/~kayvonf/">Kayvon Fatahalian</a><sup>1</sup>
+        </h5>
+        <h4 class="affiliations">
+            <sup>1</sup>Stanford University
+            &nbsp;&nbsp;&nbsp;
+            <sup>2</sup>Adobe Research
+        </h4>
+        <h5 class="venue">
+            AAAI 2024
+        </h5>
+    </div>
+
+    <div class="container teaser">
+        <img src="img/crop-outpaint.jpg" alt="Generated training data for cropping using image outpainting">
+    </div>
+
+    <div class="container content">
+        <h2>Abstract</h2>
+        <p>
+            How to frame (or crop) a photo often depends on the image subject and its context; e.g., a human portrait.
+            Recent works have defined the subject-aware image cropping task as a nuanced and practical version of image cropping.
+            We propose a weakly-supervised approach (GenCrop) to learn what makes a high-quality, subject-aware crop from professional stock images.
+            Unlike supervised prior work, GenCrop requires no new manual annotations beyond the existing stock image collection.
+            The key challenge in learning from this data, however, is that the images are already cropped and we do not know what regions were removed.
+            Our insight is to combine a library of stock images with a modern, pre-trained text-to-image diffusion model.
+            The stock image collection provides diversity, and its images serve as pseudo-labels for a good crop.
+            The text-image diffusion model is used to out-paint (i.e., outward in-painting) realistic, uncropped images.
+            Using this procedure, we are able to automatically generate a large dataset of cropped-uncropped training pairs to train a cropping model.
+            Despite being weakly-supervised, GenCrop is competitive with state-of-the-art supervised methods and significantly better than comparable weakly-supervised baselines on quantitative and qualitative evaluation metrics.
+        </p>
+    </div>
+
+    <div class="container content">
+        <h2>Materials</h2>
+        <div class="materials">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            <a href="../pdf/crop-aaai24.pdf" target="_blank">Paper</a>
+        </div>
+        <div class="materials">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            <a href="../pdf/crop-supp.pdf" target="_blank">Supplemental Materials</a>
+        </div>
+        <div class="materials">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <a href="https://arxiv.org/abs/2312.12080" target="_blank">arXiv</a>
+        </div>
+        <div class="materials">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <a href="https://github.com/jhong93/gencrop" target="_blank">Code</a>
+        </div>
+    </div>
+
+    <div class="container content">
+        <h2>Video</h2>
+        <div class="center">
+            <video width="750" controls>
+                <source src="img/crop-video.mp4" type="video/mp4">
+                Your browser does not support video tags.
+            </video>
+        </div>
+    </div>
+
+    <div class="container content">
+        <h2>Citation</h2>
+        <pre class="bibtex">
+@misc{gencrop,
+    author={Hong, James and Yuan, Lu and Gharbi, Micha\"{e}l and Fisher, Matthew and Fatahalian, Kayvon},
+    title={Learning Subject-Aware Cropping by Outpainting Professional Photos},
+    booktitle={AAAI},
+    year={2024}
+}</pre>
+    </div>
+
+    <div class="container content">
+        <h2>Acknowledgements</h2>
+        <p>
+            This work is supported by gifts from Meta and Adobe Research as well as computing support from Stanford HAI.
+        </p>
+    </div>
+  </body>
+</html>

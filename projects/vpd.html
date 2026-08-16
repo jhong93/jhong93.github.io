@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Video Pose Distillation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="../img/favicon-stanford.svg">
+    <link rel="alternate icon" href="../img/favicon-stanford.ico">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container header">
+        <h1 class="title">Video Pose Distillation for Few-Shot, Fine-Grained Sports Action Recognition</h1>
+        <h5 class="authors">
+            <a href="/">James Hong</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+            <a href="https://techmatt.github.io/">Matthew Fisher</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+            <a href="http://www.mgharbi.com/">Micha&euml;l Gharbi</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+            <a href="http://graphics.stanford.edu/~kayvonf/">Kayvon Fatahalian</a><sup>1</sup>
+        </h5>
+        <h4 class="affiliations">
+            <sup>1</sup>Stanford University
+            &nbsp;&nbsp;&nbsp;
+            <sup>2</sup>Adobe Research
+        </h4>
+        <h5 class="venue">
+            ICCV 2021
+        </h5>
+    </div>
+
+    <div class="container teaser">
+        <img src="img/vpd-system.jpg" alt="Video Pose Distillation">
+    </div>
+
+    <div class="container content">
+        <h2>Abstract</h2>
+        <p>
+Human pose is a useful feature for fine-grained sports action understanding.
+However, pose estimators are often unreliable when run on sports video due to domain shift and factors such as motion blur and occlusions.
+This leads to poor accuracy when downstream tasks, such as action recognition, depend on pose.
+End-to-end learning circumvents pose, but requires more labels to generalize.
+        </p>
+
+        <p>
+We introduce Video Pose Distillation (VPD), a weakly-supervised
+technique to learn features for new video domains, such as individual sports that challenge pose estimation.
+Under VPD, a student network learns to extract robust pose
+features from RGB frames in the sports video, such that, whenever pose
+is considered reliable, the features match the output of a pretrained teacher
+pose detector. Our strategy retains the best of both pose and end-to-end worlds, exploiting the
+rich visual patterns in raw video frames, while learning features that agree
+with the athletes' pose and motion in the target video domain
+to avoid over-fitting to patterns unrelated to athletes' motion.
+        </p>
+
+        <p>
+VPD features improve performance on few-shot, fine-grained action
+recognition, retrieval, and detection tasks in four real-world sports video datasets, without requiring additional ground-truth pose annotations.
+        </p>
+    </div>
+
+    <div class="container content">
+        <h2>Materials</h2>
+        <div class="materials">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            <a href="../pdf/vpd-iccv21.pdf" target="_blank">Paper</a>
+        </div>
+        <div class="materials">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            <a href="../pdf/vpd-supp.pdf" target="_blank">Supplemental Materials</a>
+        </div>
+        <div class="materials">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <a href="http://arxiv.org/abs/2109.01305" target="_blank">arXiv</a>,
+            <a href="https://openaccess.thecvf.com/content/ICCV2021/html/Hong_Video_Pose_Distillation_for_Few-Shot_Fine-Grained_Sports_Action_Recognition_ICCV_2021_paper.html" target="_blank">CVF Open Access</a>
+        </div>
+        <div class="materials">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <a href="https://github.com/jhong93/vpd" target="_blank">Code</a>
+        </div>
+    </div>
+
+    <div class="container content">
+        <h2>Video</h2>
+        <div class="center">
+            <video width="750" controls>
+                <source src="img/vpd-video.mp4" type="video/mp4">
+                <track src="img/vpd-sub.vtt" kind="subtitles" srclang="en" label="English" default>
+                Your browser does not support video tags.
+            </video>
+        </div>
+    </div>
+
+    <div class="container content">
+        <h2>Citation</h2>
+        <pre class="bibtex">
+@inproceedings{hong_vpd_iccv21,
+    author={Hong, James and Fisher, Matthew and Gharbi, Micha\"{e}l and Fatahalian, Kayvon},
+    title={Video Pose Distillation for Few-Shot, Fine-Grained Sports Action Recognition},
+    booktitle={ICCV},
+    year={2021}
+}</pre>
+    </div>
+
+    <div class="container content">
+        <h2>Acknowledgements</h2>
+        <p>
+            This work is supported by the National Science Foundation (NSF) under III-1908727 and Adobe Research.
+        </p>
+    </div>
+  </body>
+</html>
